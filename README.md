@@ -1,4 +1,16 @@
-# little-leaf-learning
-Little Leaf Learning is a nature-based educational web application designed with a strong focus on autism-friendly and neurodiverse-inclusive design.
-The application emphasizes low sensory load, predictable navigation, soft color palettes and pressure-free interactions. Learning content is presented visually with simple language, optional audio narration and interactive matching games without timers or negative feedback.
-The goal of the application is to create a safe, calming and engaging digital learning environment that supports children, especially those who benefit from structured and sensory-considerate interfaces.
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
