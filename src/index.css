@@ -1,68 +1,292 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Comic+Neue:wght@400;700&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+/* Nature & Sky Palette */
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --background: 150 20% 97%;
+    --foreground: 200 30% 18%;
+    
+    --card: 150 25% 95%;
+    --card-foreground: 200 30% 18%;
+    
+    --popover: 150 25% 95%;
+    --popover-foreground: 200 30% 18%;
+    
+    --primary: 195 60% 88%;
+    --primary-foreground: 200 30% 18%;
+    
+    --secondary: 140 40% 70%;
+    --secondary-foreground: 200 30% 18%;
+    
+    --muted: 150 15% 90%;
+    --muted-foreground: 200 20% 45%;
+    
+    --accent: 48 80% 78%;
+    --accent-foreground: 200 30% 18%;
+    
+    --destructive: 0 0% 70%;
+    --destructive-foreground: 200 30% 18%;
+    
+    --border: 150 20% 85%;
+    --input: 150 20% 85%;
+    --ring: 195 60% 70%;
+    
+    --radius: 1rem;
+    
+    --success: 135 40% 75%;
+    --success-foreground: 200 30% 18%;
   }
-  a:hover {
-    color: #747bff;
+
+  .dark {
+    --background: 200 25% 12%;
+    --foreground: 150 20% 92%;
+    
+    --card: 200 20% 16%;
+    --card-foreground: 150 20% 92%;
+    
+    --popover: 200 20% 16%;
+    --popover-foreground: 150 20% 92%;
+    
+    --primary: 195 50% 35%;
+    --primary-foreground: 150 20% 92%;
+    
+    --secondary: 140 35% 30%;
+    --secondary-foreground: 150 20% 92%;
+    
+    --muted: 200 15% 22%;
+    --muted-foreground: 150 15% 65%;
+    
+    --accent: 48 60% 40%;
+    --accent-foreground: 150 20% 92%;
+    
+    --destructive: 0 0% 40%;
+    --destructive-foreground: 150 20% 92%;
+    
+    --border: 200 15% 25%;
+    --input: 200 15% 25%;
+    --ring: 195 50% 45%;
   }
-  button {
-    background-color: #f9f9f9;
+
+  * {
+    @apply border-border;
   }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Nunito', 'Comic Neue', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  /* Nature-themed card */
+  .nature-card {
+    @apply bg-card rounded-3xl p-6 shadow-lg border-2 border-border;
+    background: linear-gradient(
+      145deg,
+      hsl(var(--card)) 0%,
+      hsl(var(--background)) 100%
+    );
+  }
+  
+  /* Primary button with nature feel */
+  .btn-nature {
+    @apply px-8 py-5 rounded-2xl font-bold text-xl transition-all duration-300;
+    @apply bg-primary text-primary-foreground;
+    @apply hover:scale-105 active:scale-95;
+    @apply shadow-lg hover:shadow-xl;
+    @apply border-2 border-primary/50;
+  }
+  
+  .btn-nature-secondary {
+    @apply px-8 py-5 rounded-2xl font-bold text-xl transition-all duration-300;
+    @apply bg-secondary text-secondary-foreground;
+    @apply hover:scale-105 active:scale-95;
+    @apply shadow-lg hover:shadow-xl;
+    @apply border-2 border-secondary/50;
+  }
+  
+ 
+  .touch-target {
+    @apply min-h-[56px] min-w-[56px];
+  }
+  
+  /* Game card */
+  .game-card {
+    @apply bg-card rounded-3xl p-6 shadow-xl border-2 transition-all duration-300;
+    @apply hover:shadow-2xl;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--card)) 0%,
+      hsl(var(--primary) / 0.15) 100%
+    );
+  }
+  
+  .game-card-selected {
+    @apply ring-4 ring-primary ring-offset-2 ring-offset-background scale-105;
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.4);
+  }
+  
+  .game-card-correct {
+    @apply ring-4 ring-secondary ring-offset-2 ring-offset-background;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--secondary) / 0.3) 0%,
+      hsl(var(--secondary) / 0.1) 100%
+    );
+    box-shadow: 0 0 40px hsl(var(--secondary) / 0.5);
+  }
+  
+  .game-card-matched {
+    @apply opacity-50 scale-95;
+    filter: grayscale(0.3);
+  }
+  
+  /* Category card */
+  .category-card {
+    @apply relative overflow-hidden rounded-3xl p-8 shadow-xl transition-all duration-300;
+    @apply hover:scale-105 hover:shadow-2xl active:scale-100;
+    @apply border-2 border-white/30;
+  }
+  
+  .category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.1) 100%);
+    pointer-events: none;
+  }
+}
+
+/* Gentle animations */
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes leaf-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-6px) rotate(3deg); }
+  75% { transform: translateY(6px) rotate(-3deg); }
+}
+
+@keyframes soft-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--secondary) / 0.3); }
+  50% { box-shadow: 0 0 35px hsl(var(--secondary) / 0.5); }
+}
+
+@keyframes gentle-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@keyframes soft-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.03); opacity: 0.9; }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-30px) scale(1.2); opacity: 0; }
+}
+
+@keyframes slide-up {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-gentle-bounce {
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+.animate-leaf-float {
+  animation: leaf-float 4s ease-in-out infinite;
+}
+
+.animate-soft-glow {
+  animation: soft-glow 2s ease-in-out infinite;
+}
+
+.animate-gentle-shake {
+  animation: gentle-shake 0.3s ease-in-out;
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 2s ease-in-out infinite;
+}
+
+.animate-float-up {
+  animation: float-up 0.8s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out;
+}
+
+.animate-pop-in {
+  animation: pop-in 0.3s ease-out;
+}
+
+
+.reward-leaf {
+  animation: float-up 1s ease-out forwards;
+}
+
+/* Better focus states for accessibility */
+*:focus-visible {
+  @apply outline-none ring-4 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* Gradient backgrounds */
+.bg-nature-gradient {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.3) 0%,
+    hsl(var(--secondary) / 0.2) 50%,
+    hsl(var(--accent) / 0.2) 100%
+  );
+}
+
+/* Sound button special styling */
+.sound-button {
+  @apply relative overflow-hidden;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--accent)) 0%,
+    hsl(var(--accent) / 0.8) 100%
+  );
+}
+
+.sound-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, hsl(var(--accent) / 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease;
+}
+
+.sound-button:hover::after {
+  transform: translate(-50%, -50%) scale(2);
 }

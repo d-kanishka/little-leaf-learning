@@ -1,35 +1,75 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AudioProvider } from "./contexts/AudioContext";
+import HomePage from "./pages/HomePage";
+import AnimalsPage from "./pages/AnimalsPage";
+import PlantsPage from "./pages/PlantsPage";
+import WeatherPage from "./pages/WeatherPage";
+import SeasonsPage from "./pages/SeasonsPage";
+import GamesPage from "./pages/GamesPage";
+// Animal Games
+import AnimalTapLearnGame from "./pages/games/animals/TapLearnGame";
+import AnimalMatchingGame from "./pages/games/animals/MatchingGame";
+import AnimalDragDropGame from "./pages/games/animals/DragDropGame";
+import AnimalSoundMatchGame from "./pages/games/animals/SoundMatchGame";
+import AnimalColoringGame from "./pages/games/animals/ColoringGame";
+// Plant Games
+import PlantTapPartGame from "./pages/games/plants/TapPartGame";
+import GrowPlantGame from "./pages/games/plants/GrowPlantGame";
+import PlantSortingGame from "./pages/games/plants/SortingGame";
+import PlantMatchingGame from "./pages/games/plants/MatchingGame";
+import PlantColoringGame from "./pages/games/plants/ColoringGame";
+// Weather Games
+import WeatherTodayGame from "./pages/games/weather/TodayWeatherGame";
+import WeatherMatchingGame from "./pages/games/weather/MatchingGame";
+import DressWeatherGame from "./pages/games/weather/DressWeatherGame";
+import WeatherAnimationGame from "./pages/games/weather/AnimationGame";
+// Season Games
+import SeasonDrawingGame from "./pages/games/seasons/DrawingGame";
+import NotFound from "./pages/NotFound";
 
-function App() {
-  const [count, setCount] = useState(0)
+const queryClient = new QueryClient();
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <AudioProvider>
+        <Toaster />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/animals" element={<AnimalsPage />} />
+            <Route path="/plants" element={<PlantsPage />} />
+            <Route path="/weather" element={<WeatherPage />} />
+            <Route path="/seasons" element={<SeasonsPage />} />
+            <Route path="/games" element={<GamesPage />} />
+            {/* Animal Games */}
+            <Route path="/games/animals/tap-learn" element={<AnimalTapLearnGame />} />
+            <Route path="/games/animals/matching" element={<AnimalMatchingGame />} />
+            <Route path="/games/animals/drag-drop" element={<AnimalDragDropGame />} />
+            <Route path="/games/animals/sound-match" element={<AnimalSoundMatchGame />} />
+            <Route path="/games/animals/coloring" element={<AnimalColoringGame />} />
+            {/* Plant Games */}
+            <Route path="/games/plants/tap-part" element={<PlantTapPartGame />} />
+            <Route path="/games/plants/grow" element={<GrowPlantGame />} />
+            <Route path="/games/plants/sorting" element={<PlantSortingGame />} />
+            <Route path="/games/plants/matching" element={<PlantMatchingGame />} />
+            <Route path="/games/plants/coloring" element={<PlantColoringGame />} />
+            {/* Weather Games */}
+            <Route path="/games/weather/today" element={<WeatherTodayGame />} />
+            <Route path="/games/weather/matching" element={<WeatherMatchingGame />} />
+            <Route path="/games/weather/dress" element={<DressWeatherGame />} />
+            <Route path="/games/weather/animation" element={<WeatherAnimationGame />} />
+            {/* Season Games */}
+            <Route path="/games/seasons/drawing" element={<SeasonDrawingGame />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AudioProvider>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
-export default App
+export default App;
