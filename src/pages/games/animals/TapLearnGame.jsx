@@ -34,7 +34,7 @@ export default function AnimalTapLearnGame() {
             <h1 className="text-2xl font-bold text-foreground mb-2">
               Tap & Learn
             </h1>
-            <p className="text-blue-700">Tap an animal to hear its sound!</p>
+            <p className="text-muted-foreground">Tap an animal to hear its sound!</p>
           </div>
         </div>
       </header>

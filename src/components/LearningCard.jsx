@@ -29,10 +29,18 @@ export default function LearningCard({ item, showImage = true }) {
         )}
       </div>
 
-      {/* Name */}
-      <h2 className="text-4xl font-extrabold text-center text-foreground mb-2">
-        {item.emoji} {item.name}
-      </h2>
+     {/* Name */}
+<h2 className="text-4xl font-extrabold text-center text-foreground mb-2">
+  {/* show wont show emoji for plants or seasons */}
+  {item.type !== 'plant' && 
+   item.category !== 'plant' && 
+   item.type !== 'tree' && 
+   item.type !== 'flower' && 
+   item.type !== 'vegetable' && 
+   item.type !== 'fruit' &&
+   !item.natureChange ? `${item.emoji} ` : ''}
+  {item.name}
+</h2>
 
       {/* Shelter info for animals */}
       {item.shelterName && (
@@ -88,3 +96,4 @@ export default function LearningCard({ item, showImage = true }) {
     </div>
   );
 }
+
