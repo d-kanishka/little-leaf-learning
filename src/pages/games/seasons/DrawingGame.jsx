@@ -1,0 +1,106 @@
+import React, { useRef, useState, useEffect } from 'react';
+import BackButton from '../../../components/BackButton';
+import AudioToggle from '../../../components/AudioToggle';
+import { useAudio } from '../../../contexts/AudioContext';
+
+const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#F7DC6F', '#85C1E9', '#000000', '#FFFFFF'];
+
+export default function SeasonDrawingGame() {
+  const { playSound, collectLeaf } = useAudio();
+  const canvasRef = useRef(null);
+  const [selectedColor, setSelectedColor] = useState('#000000');
+  const [boardType, setBoardType] = useState('white');
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [brushSize, setBrushSize] = useState(8);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = boardType === 'white' ? '#ffffff' : '#1a1a2e';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }, [boardType]);
+
+  const getPos = (e) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: (clientX - rect.left) * (canvas.width / rect.width), y: (clientY - rect.top) * (canvas.height / rect.height) };
+  };
+
+  const startDraw = (e) => { e.preventDefault(); setIsDrawing(true); draw(e); };
+  const endDraw = () => setIsDrawing(false);
+  const draw = (e) => {
+    if (!isDrawing) return;
+    e.preventDefault();
+    const { x, y } = getPos(e);
+    const ctx = canvasRef.current.getContext('2d');
+    ctx.fillStyle = selectedColor;
+    ctx.beginPath();
+    ctx.arc(x, y, brushSize, 0, Math.PI * 2);
+    ctx.fill();
+  };
+
+  const clearCanvas = () => {
+    playSound('click');
+    const ctx = canvasRef.current.getContext('2d');
+    ctx.fillStyle = boardType === 'white' ? '#ffffff' : '#1a1a2e';
+    ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+  };
+
+  const toggleBoard = () => {
+    playSound('click');
+    setBoardType(b => b === 'white' ? 'black' : 'white');
+    setSelectedColor(boardType === 'white' ? '#FFFFFF' : '#000000');
+  };
+
+  return (
+    <div className="min-h-screen bg-background pb-24">
+      <AudioToggle />
+      <header className="pt-4 px-4">
+        <div className="max-w-2xl mx-auto">
+          <BackButton to="/seasons" />
+          <div className="text-center mt-4 mb-2">
+            <h1 className="text-2xl font-bold">Drawing Board</h1>
+            <p className="text-muted-foreground">Draw anything about seasons!</p>
+          </div>
+        </div>
+      </header>
+      <main className="px-4">
+        <div className="max-w-lg mx-auto">
+          <div className="flex gap-2 mb-3 justify-center">
+            <button onClick={toggleBoard} className="px-4 py-2 bg-white rounded-xl shadow font-bold text-sm">
+              {boardType === 'white' ? '⬛ Black Board' : '⬜ White Board'}
+            </button>
+            <button onClick={clearCanvas} className="px-4 py-2 bg-white rounded-xl shadow font-bold text-sm">🗑️ Clear</button>
+          </div>
+          <div className="flex gap-2 mb-3 justify-center flex-wrap">
+            {colors.map(c => (
+              <button key={c} onClick={() => { playSound('click'); setSelectedColor(c); }}
+                className={`w-8 h-8 rounded-full border-3 ${selectedColor === c ? 'border-primary scale-110' : 'border-gray-300'}`}
+                style={{ backgroundColor: c }} />
+            ))}
+          </div>
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <span className="text-sm">Size:</span>
+            {[4, 8, 15, 25].map(s => (
+              <button key={s} onClick={() => setBrushSize(s)}
+                className={`w-8 h-8 rounded-full flex items-center justify-center ${brushSize === s ? 'bg-primary text-white' : 'bg-white'}`}>
+                <div className="rounded-full bg-current" style={{ width: s, height: s }} />
+              </button>
+            ))}
+          </div>
+          <canvas ref={canvasRef} width={350} height={350}
+            className="w-full max-w-[350px] mx-auto rounded-2xl shadow-lg touch-none"
+            style={{ backgroundColor: boardType === 'white' ? '#fff' : '#1a1a2e' }}
+            onMouseDown={startDraw} onMouseUp={endDraw} onMouseMove={draw} onMouseLeave={endDraw}
+            onTouchStart={startDraw} onTouchEnd={endDraw} onTouchMove={draw} />
+          <button onClick={() => { playSound('correct'); collectLeaf(); }} className="w-full mt-4 py-3 bg-gradient-to-r from-secondary to-primary rounded-xl font-bold">
+            I'm Done! ⭐ 
+          </button>
+        </div>
+      </main>
+    </div>
+  );
+}
