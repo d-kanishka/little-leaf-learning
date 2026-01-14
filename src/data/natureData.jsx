@@ -325,14 +325,14 @@ export const plantsData = [
     type: "fruit"
   }
 ];
-
-
+ 
 export const weatherData = [
   {
     id: "weather-1",
     name: "Sunny",
     emoji: "☀️",
     image: "https://images.unsplash.com/photo-1601297183305-6df142704ea2?w=400&h=400&fit=crop",
+    gifPlaceholder: "/placeholder.svg", // Placeholder for user's GIF
     description: "The sun is bright in the sky. It is warm and great for playing outside!",
     clothes: ["T-shirt", "Shorts", "Sunglasses", "Hat"],
     clothesEmoji: ["👕", "🩳", "🕶️", "👒"],
@@ -343,6 +343,7 @@ export const weatherData = [
     name: "Rainy",
     emoji: "🌧️",
     image: "https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=400&h=400&fit=crop",
+    gifPlaceholder: "/placeholder.svg",
     description: "Water drops fall from clouds. We need umbrella and raincoat!",
     clothes: ["Raincoat", "Umbrella", "Boots"],
     clothesEmoji: ["🧥", "☂️", "👢"],
@@ -353,6 +354,7 @@ export const weatherData = [
     name: "Cloudy",
     emoji: "☁️",
     image: "https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=400&h=400&fit=crop",
+    gifPlaceholder: "/placeholder.svg",
     description: "Grey clouds cover the sky. It might rain later.",
     clothes: ["Jacket", "Long Pants"],
     clothesEmoji: ["🧥", "👖"],
@@ -363,6 +365,7 @@ export const weatherData = [
     name: "Windy",
     emoji: "🌬️",
     image: "/src/assets/windy.png",
+    gifPlaceholder: "/placeholder.svg",
     description: "Wind blows and leaves move. Trees sway in the breeze.",
     clothes: ["Jacket", "Scarf"],
     clothesEmoji: ["🧥", "🧣"],
@@ -370,13 +373,14 @@ export const weatherData = [
   },
   {
     id: "weather-5",
-    name: "Stormy",
-    emoji: "⛈️",
-    image: "https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28?w=400&h=400&fit=crop",
-    description: "Dark clouds with thunder and lightning. Stay safe inside!",
-    clothes: ["Stay Inside"],
-    clothesEmoji: ["🏠"],
-    animation: "stormy"
+    name: "Snowy",
+    emoji: "❄️",
+    image: "https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=400&h=400&fit=crop",
+    gifPlaceholder: "/placeholder.svg",
+    description: "Snow falls and it is very cold. Wear warm clothes!",
+    clothes: ["Coat", "Scarf", "Gloves", "Boots"],
+    clothesEmoji: ["🧥", "🧣", "🧤", "👢"],
+    animation: "snowy"
   }
 ];
 
@@ -384,39 +388,63 @@ export const seasonsData = [
   {
     id: "season-1",
     name: "Spring",
+    emoji: "🌸",
     image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=400&fit=crop",
+    gifPlaceholder: "/assets/spring.gif",
     description: "Flowers bloom and baby animals are born. Weather gets warmer.",
     natureChange: "Flowers bloom",
+    bgColor: "from-pink-200 to-green-200",
     clothes: ["Light Jacket", "T-shirt"],
     clothesEmoji: ["🧥", "👕"]
   },
   {
     id: "season-2",
     name: "Summer",
+    emoji: "☀️",
     image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=400&fit=crop",
+    gifPlaceholder: "/public/assets/summer.gif",
     description: "The sun is bright and days are long. Perfect for swimming!",
     natureChange: "Sun shines bright",
+    bgColor: "from-yellow-200 to-orange-200",
     clothes: ["T-shirt", "Shorts", "Sunglasses"],
     clothesEmoji: ["👕", "🩳", "🕶️"]
   },
   {
     id: "season-3",
     name: "Autumn",
-    image: "src/assets/autum.png",
+    emoji: "🍂",
+    image: "/src/assets/autum.png",
+    gifPlaceholder: "/public/assets/autum.gif",
     description: "Leaves change color and fall from trees. Weather becomes cool.",
     natureChange: "Leaves fall",
+    bgColor: "from-orange-300 to-amber-400",
     clothes: ["Sweater", "Jacket"],
     clothesEmoji: ["🧶", "🧥"]
   },
   {
     id: "season-4",
     name: "Winter",
+    emoji: "❄️",
     image: "https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=400&h=400&fit=crop",
+    gifPlaceholder: "/public/assets/snowfall.gif",
     description: "Snow falls and it is very cold. Animals rest and stay warm.",
     natureChange: "Snow falls",
+    bgColor: "from-blue-100 to-white",
     clothes: ["Coat", "Scarf", "Gloves", "Boots"],
     clothesEmoji: ["🧥", "🧣", "🧤", "👢"]
   }
+];
+
+// Items for season matching game
+export const seasonMatchItems = [
+  { id: "flower", name: "Flower", emoji: "🌸", season: "Spring" },
+  { id: "butterfly", name: "Butterfly", emoji: "🦋", season: "Spring" },
+  { id: "icecream", name: "Ice cream", emoji: "🍦", season: "Summer" },
+  { id: "sunglasses", name: "Sunglasses", emoji: "🕶️", season: "Summer" },
+  { id: "leaf", name: "Leaf", emoji: "🍂", season: "Autumn" },
+  { id: "pumpkin", name: "Pumpkin", emoji: "🎃", season: "Autumn" },
+  { id: "jacket", name: "Jacket", emoji: "🧥", season: "Winter" },
+  { id: "snowman", name: "Snowman", emoji: "⛄", season: "Winter" }
 ];
 
 // All categories for navigation
@@ -450,6 +478,8 @@ export const weatherGames = [
 ];
 
 export const seasonGames = [
+   { id: "wheel", name: "Season Wheel", emoji: "🎡", description: "Turn the wheel to see seasons", path: "/games/seasons/wheel" },
+  { id: "matching", name: "Match Season", emoji: "🧩", description: "Match items to seasons", path: "/games/seasons/matching" },
   { id: "drawing", name: "Drawing Board", emoji: "🎨", description: "Draw about seasons", path: "/games/seasons/drawing" }
 ];
 
