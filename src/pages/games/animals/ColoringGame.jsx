@@ -6,19 +6,20 @@ import { animalsData } from '../../../data/natureData';
 import { useAudio } from '../../../contexts/AudioContext';
 
 const colors = [
-  '#FF6B6B', '#FF9999', // Reds
-  '#4ECDC4', '#88D9D9', // Teals
-  '#45B7D1', '#7DC8E8', // Blues
-  '#96CEB4', '#B8E6B8', // Greens
-  '#FFEAA7', '#FFF4CC', // Yellows
-  '#DDA0DD', '#E8B8E8', // Purples
-  '#98D8C8', '#B8E6D8', // Mint
-  '#F7DC6F', '#FFEE99', // Gold
-  '#BB8FCE', '#D5B8E8', // Lavender
-  '#85C1E9', '#A9D4F5', // Light Blue
-  '#F5B041', '#FFCC80', // Orange
-  '#58D68D', '#8AEFB0', // Lime
-  '#000000', '#333333', '#666666', // Blacks/Grays
+  '#FF6B6B', '#FF9999', 
+  '#4ECDC4', '#88D9D9', 
+  '#45B7D1', '#7DC8E8', 
+  '#96CEB4', '#B8E6B8', 
+  '#FFEAA7', '#FFF4CC', 
+  '#DDA0DD', '#E8B8E8', 
+  '#98D8C8', '#B8E6D8', 
+  '#F7DC6F', '#FFEE99',
+  '#BB8FCE', '#D5B8E8',
+  '#85C1E9', '#A9D4F5', 
+  '#F5B041', '#FFCC80', 
+  '#58D68D', '#8AEFB0',
+  '#000000', '#333333', '#666666', 
+  '#C0392B', '#8E44AD', '#2C3E50', '#F39C12' 
 ];
 
 const brushSizes = [3, 6, 10, 15, 20];
@@ -32,7 +33,7 @@ export default function AnimalColoringGame() {
   const [isDrawing, setIsDrawing] = useState(false);
   const [lastPos, setLastPos] = useState(null);
   const [isEraser, setIsEraser] = useState(false);
-  const [outlineImage, setOutlineImage] = useState(null);
+  const [outlineCanvas, setOutlineCanvas] = useState(null);
 
   // Load image when animal is selected
   useEffect(() => {
@@ -46,21 +47,26 @@ export default function AnimalColoringGame() {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Load the outline image
+    // Create a separate canvas for the outline
+    const outline = document.createElement('canvas');
+    outline.width = canvas.width;
+    outline.height = canvas.height;
+    const outlineCtx = outline.getContext('2d');
+    
+    // Load the outline image or use emoji as fallback
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       const scale = Math.min(canvas.width / img.width, canvas.height / img.height) * 0.8;
       const x = (canvas.width - img.width * scale) / 2;
       const y = (canvas.height - img.height * scale) / 2;
+      
+      // Draw outline on main canvas
       ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-      // Save the outline image data for eraser
-      const outlineCanvas = document.createElement('canvas');
-      outlineCanvas.width = canvas.width;
-      outlineCanvas.height = canvas.height;
-      const outlineCtx = outlineCanvas.getContext('2d');
+      
+      // Save outline to separate canvas
       outlineCtx.drawImage(img, x, y, img.width * scale, img.height * scale);
-      setOutlineImage(outlineCanvas);
+      setOutlineCanvas(outline);
     };
     img.onerror = () => {
       // Fallback: draw emoji
@@ -69,17 +75,14 @@ export default function AnimalColoringGame() {
       ctx.textBaseline = 'middle';
       ctx.fillStyle = '#000000';
       ctx.fillText(selectedAnimal.emoji, canvas.width / 2, canvas.height / 2);
-      // Save the emoji outline
-      const outlineCanvas = document.createElement('canvas');
-      outlineCanvas.width = canvas.width;
-      outlineCanvas.height = canvas.height;
-      const outlineCtx = outlineCanvas.getContext('2d');
+      
+      // Save emoji to outline canvas
       outlineCtx.font = '150px serif';
       outlineCtx.textAlign = 'center';
       outlineCtx.textBaseline = 'middle';
       outlineCtx.fillStyle = '#000000';
       outlineCtx.fillText(selectedAnimal.emoji, canvas.width / 2, canvas.height / 2);
-      setOutlineImage(outlineCanvas);
+      setOutlineCanvas(outline);
     };
     img.src = selectedAnimal.outlineImage;
   }, [selectedAnimal]);
@@ -116,30 +119,63 @@ export default function AnimalColoringGame() {
     const ctx = canvasRef.current.getContext('2d');
     
     if (isEraser) {
-      // Eraser mode - use destination-out compositing to erase
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.strokeStyle = 'rgba(0,0,0,1)'; // Any color works with destination-out
-      ctx.fillStyle = 'rgba(0,0,0,1)';
+      // Save current state
+      ctx.save();
+      
+      // Create a temporary canvas for erasing
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = ctx.canvas.width;
+      tempCanvas.height = ctx.canvas.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      
+      // Copy current drawing
+      tempCtx.drawImage(ctx.canvas, 0, 0);
+      
+      // Draw white circle where eraser touches
+      tempCtx.globalCompositeOperation = 'destination-out';
+      tempCtx.beginPath();
+      if (lastPos) {
+        tempCtx.moveTo(lastPos.x, lastPos.y);
+        tempCtx.lineTo(pos.x, pos.y);
+        tempCtx.lineWidth = brushSize;
+        tempCtx.lineCap = 'round';
+        tempCtx.lineJoin = 'round';
+        tempCtx.stroke();
+      } else {
+        tempCtx.arc(pos.x, pos.y, brushSize / 2, 0, Math.PI * 2);
+        tempCtx.fill();
+      }
+      
+      // Clear main canvas
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      
+      // Redraw outline first
+      if (outlineCanvas) {
+        ctx.drawImage(outlineCanvas, 0, 0);
+      }
+      
+      // Draw the erased version
+      ctx.drawImage(tempCanvas, 0, 0);
+      
+      ctx.restore();
     } else {
-      // Drawing mode - normal compositing
-      ctx.globalCompositeOperation = 'source-over';
+      // Normal drawing
       ctx.strokeStyle = selectedColor;
       ctx.fillStyle = selectedColor;
-    }
-    
-    ctx.lineWidth = brushSize;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    
-    if (lastPos) {
-      ctx.beginPath();
-      ctx.moveTo(lastPos.x, lastPos.y);
-      ctx.lineTo(pos.x, pos.y);
-      ctx.stroke();
-    } else {
-      ctx.beginPath();
-      ctx.arc(pos.x, pos.y, brushSize / 2, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.lineWidth = brushSize;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      
+      if (lastPos) {
+        ctx.beginPath();
+        ctx.moveTo(lastPos.x, lastPos.y);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, brushSize / 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
     
     setLastPos(pos);
@@ -165,9 +201,9 @@ export default function AnimalColoringGame() {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      // Redraw the outline from saved image
-      if (outlineImage) {
-        ctx.drawImage(outlineImage, 0, 0);
+      // Redraw the outline
+      if (outlineCanvas) {
+        ctx.drawImage(outlineCanvas, 0, 0);
       } else {
         // Fallback: redraw outline
         const img = new Image();
@@ -294,10 +330,10 @@ export default function AnimalColoringGame() {
             </div>
           </div>
 
-          {/* Color palette */}
+          {/* Color palette - Now with 4 more colors */}
           <div className="mb-4">
             <div className="text-sm font-medium mb-2 text-center">Colors</div>
-            <div className="grid grid-cols-8 gap-2 justify-center">
+            <div className="grid grid-cols-9 gap-1 justify-center">
               {colors.map((c) => (
                 <button
                   key={c}
@@ -306,7 +342,7 @@ export default function AnimalColoringGame() {
                     setSelectedColor(c);
                     setIsEraser(false);
                   }}
-                  className={`w-8 h-8 rounded-full border-3 transition-all ${selectedColor === c && !isEraser ? 'border-foreground scale-110 ring-2 ring-offset-1' : 'border-white'}`}
+                  className={`w-7 h-7 rounded-full border-2 transition-all ${selectedColor === c && !isEraser ? 'border-foreground scale-110 ring-1 ring-offset-1' : 'border-white'}`}
                   style={{ backgroundColor: c }}
                   title={c}
                 />
