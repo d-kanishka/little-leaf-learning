@@ -1,11 +1,23 @@
-/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useCallback } from 'react';
 
 const AudioContext = createContext();
 
+// Animal sound patterns 
+const animalSounds = {
+  dog: { text: "Woof! Woof! Woof!", pitch: 0.8, rate: 1.0 },
+  cat: { text: "Meow! Meow! Meow!", pitch: 1.3, rate: 0.9 },
+  cow: { text: "Moo! Moo! Moo!", pitch: 0.6, rate: 0.7 },
+  horse: { text: "Neigh! Neigh!", pitch: 0.7, rate: 0.8 },
+  rabbit: { text: "Squeak! Squeak!", pitch: 1.5, rate: 1.2 },
+  sparrow: { text: "Chirp! Chirp! Chirp!", pitch: 1.8, rate: 1.3 },
+  hen: { text: "Cluck! Cluck! Cluck!", pitch: 1.2, rate: 1.1 },
+  duck: { text: "Quack! Quack! Quack!", pitch: 1.1, rate: 1.0 },
+  butterfly: { text: "Flutter! Flutter!", pitch: 1.6, rate: 1.2 },
+  ladybug: { text: "Buzz! Buzz!", pitch: 1.7, rate: 1.4 }
+};
+
 export function AudioProvider({ children }) {
   const [audioEnabled, setAudioEnabled] = useState(true);
-  const [collectedLeaves, setCollectedLeaves] = useState(0);
 
   const toggleAudio = useCallback(() => {
     setAudioEnabled(prev => !prev);
@@ -25,16 +37,18 @@ export function AudioProvider({ children }) {
     window.speechSynthesis.speak(utterance);
   }, [audioEnabled]);
 
-  // Play animal-specific sounds with voice
+  // Play animal sounds
   const playAnimalSound = useCallback((animal) => {
     if (!audioEnabled) return;
     
     window.speechSynthesis.cancel();
     
-    const soundText = animal.soundText || `This is a ${animal.name}`;
-    const utterance = new SpeechSynthesisUtterance(soundText);
-    utterance.rate = 0.9;
-    utterance.pitch = 1.2;
+    const soundKey = animal.soundUrl || animal.name.toLowerCase();
+    const sound = animalSounds[soundKey] || { text: animal.name, pitch: 1.0, rate: 1.0 };
+    
+    const utterance = new SpeechSynthesisUtterance(sound.text);
+    utterance.rate = sound.rate;
+    utterance.pitch = sound.pitch;
     utterance.volume = 0.9;
     
     window.speechSynthesis.speak(utterance);
@@ -70,11 +84,11 @@ export function AudioProvider({ children }) {
         oscillator.start(audioContext.currentTime);
         oscillator.stop(audioContext.currentTime + 0.08);
         break;
-      case 'leaf':
+      case 'water':
         oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(880, audioContext.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(1760, audioContext.currentTime + 0.2);
-        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.3);
+        gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
         oscillator.start(audioContext.currentTime);
         oscillator.stop(audioContext.currentTime + 0.3);
@@ -84,19 +98,12 @@ export function AudioProvider({ children }) {
     }
   }, [audioEnabled]);
 
-  const collectLeaf = useCallback(() => {
-    setCollectedLeaves(prev => prev + 1);
-    playSound('leaf');
-  }, [playSound]);
-
   const value = {
     audioEnabled,
     toggleAudio,
     speak,
     playSound,
     playAnimalSound,
-    collectedLeaves,
-    collectLeaf
   };
 
   return (
