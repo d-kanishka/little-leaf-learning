@@ -56,32 +56,78 @@ export default function SeasonDrawingGame() {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div style={{ minHeight: '100vh', backgroundColor: '#f8f9fa', paddingBottom: '6rem' }}>
       <AudioToggle />
-      <header className="pt-4 px-4">
-        <div className="max-w-2xl mx-auto">
+      <header style={{ paddingTop: '1rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
+        <div style={{ maxWidth: '42rem', marginLeft: 'auto', marginRight: 'auto' }}>
           <BackButton to="/seasons" />
-          <div className="text-center mt-4 mb-2">
-            <h1 className="text-2xl font-bold">Drawing Board</h1>
-            <p className="text-muted-foreground">Draw anything about seasons!</p>
+          <div style={{ textAlign: 'center', marginTop: '1rem', marginBottom: '0.5rem' }}>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1f2937' }}>Drawing Board</h1>
+            <p style={{ color: '#6b7280' }}>Draw anything about seasons!</p>
           </div>
         </div>
       </header>
-      <main className="px-4">
-        <div className="max-w-lg mx-auto">
-          <div className="flex gap-2 mb-3 justify-center">
-            <button onClick={toggleBoard} className="px-4 py-2 bg-white rounded-xl shadow font-bold text-sm">
-              {boardType === 'white' ? '⬛ Black Board' : '⬜ White Board'}
+      <main style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+        <div style={{ maxWidth: '32rem', marginLeft: 'auto', marginRight: 'auto' }}>
+          
+          {/* Board */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.75rem', gap: '8px' }}>
+            <button 
+              onClick={toggleBoard} 
+              style={{ 
+                paddingLeft: '1rem',
+                paddingRight: '1rem',
+                paddingTop: '0.5rem',
+                paddingBottom: '0.5rem',
+                backgroundColor: 'white',
+                borderRadius: '0.75rem',
+                boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+                fontWeight: 'bold',
+                fontSize: '0.875rem',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
+              <span>{boardType === 'white' ? '⬛' : '⬜'}</span>
+              <span>{boardType === 'white' ? 'Black Board' : 'White Board'}</span>
             </button>
-            <button onClick={clearCanvas} className="px-4 py-2 bg-white rounded-xl shadow font-bold text-sm">🗑️ Clear</button>
+            <button 
+              onClick={clearCanvas} 
+              style={{ 
+                paddingLeft: '1rem',
+                paddingRight: '1rem',
+                paddingTop: '0.5rem',
+                paddingBottom: '0.5rem',
+                backgroundColor: 'white',
+                borderRadius: '0.75rem',
+                boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+                fontWeight: 'bold',
+                fontSize: '0.875rem',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
+              <span>🗑️</span>
+              <span>Clear</span>
+            </button>
           </div>
+          
+          {/* Color palette */}
           <div className="flex gap-2 mb-3 justify-center flex-wrap">
             {colors.map(c => (
               <button key={c} onClick={() => { playSound('click'); setSelectedColor(c); }}
                 className={`w-8 h-8 rounded-full border-3 ${selectedColor === c ? 'border-primary scale-110' : 'border-gray-300'}`}
                 style={{ backgroundColor: c }} />
             ))}
-          </div>
+</div>
+          
+          {/* brush size selection */}
           <div className="flex items-center justify-center gap-3 mb-3">
             <span className="text-sm">Size:</span>
             {[4, 8, 15, 25].map(s => (
@@ -90,15 +136,20 @@ export default function SeasonDrawingGame() {
                 <div className="rounded-full bg-current" style={{ width: s, height: s }} />
               </button>
             ))}
-          </div>
+</div>
+          
+          {/* Canvas */}
           <canvas ref={canvasRef} width={350} height={350}
             className="w-full max-w-[350px] mx-auto rounded-2xl shadow-lg touch-none"
             style={{ backgroundColor: boardType === 'white' ? '#fff' : '#1a1a2e' }}
             onMouseDown={startDraw} onMouseUp={endDraw} onMouseMove={draw} onMouseLeave={endDraw}
-            onTouchStart={startDraw} onTouchEnd={endDraw} onTouchMove={draw} />
-          <button onClick={() => { playSound('correct'); collectLeaf(); }} className="w-full mt-4 py-3 bg-gradient-to-r from-secondary to-primary rounded-xl font-bold">
+></canvas>
+          
+          {/* button */}
+           <button onClick={() => { playSound('correct'); collectLeaf(); }} className="w-full mt-4 py-3 bg-gradient-to-r from-secondary to-primary rounded-xl font-bold">
             I'm Done! ⭐ 
-          </button>
+</button>
+          
         </div>
       </main>
     </div>

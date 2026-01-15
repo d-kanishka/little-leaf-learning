@@ -280,23 +280,17 @@ export default function SeasonMatchingGame() {
                               </div>
                             )}
                           </div>
-                          
-                          <div className="absolute -right-4 top-1/2 transform -translate-y-1/2">
-                            <div className="w-8 h-8 rounded-full bg-white border-4 border-gray-400 flex items-center justify-center shadow">
-                              <div className="w-3 h-3 rounded-full bg-gray-600"></div>
-                            </div>
-                          </div>
                         </div>
                       );
                     })}
                   </div>
 
-                  {/* Middle Column - Instructions */}
+                  {/* Middle Column */}
                   <div className="flex flex-col items-center justify-center">
                     
                   </div>
 
-                  {/* Right Column - Seasons */}
+                  {/* Right Column */}
                   <div className="space-y-6">
                     {seasonsData.map((season) => {
                       const isMatched = matchedPairs.some(pair => {
@@ -330,12 +324,6 @@ export default function SeasonMatchingGame() {
                                 <span className="text-secondary text-2xl">✓</span>
                               </div>
                             )}
-                          </div>
-                          
-                          <div className="absolute -left-4 top-1/2 transform -translate-y-1/2">
-                            <div className="w-8 h-8 rounded-full bg-white border-4 border-gray-400 flex items-center justify-center shadow">
-                              <div className="w-3 h-3 rounded-full bg-gray-600"></div>
-                            </div>
                           </div>
                         </div>
                       );
