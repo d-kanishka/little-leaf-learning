@@ -282,7 +282,8 @@ export const plantsData = [
     description: "Trees are tall plants with roots, trunk, branches and leaves.",
     parts: ["Root", "Trunk", "Branches", "Leaves"],
     partsEmoji: ["🌱", "🪵", "🌿", "🍃"],
-    type: "tree"
+    type: "tree",
+    outlineImage:"/public/assets/tree_ot.png"
   },
   {
     id: "plant-2",
@@ -292,7 +293,8 @@ export const plantsData = [
     description: "Flowers have petals and stem. They are colorful and smell nice.",
     parts: ["Petals", "Stem", "Leaves"],
     partsEmoji: ["🌸", "🌿", "🍃"],
-    type: "flower"
+    type: "flower",
+     outlineImage:"/public/assets/flower_ot.png"
   },
   {
     id: "plant-3",
@@ -302,7 +304,8 @@ export const plantsData = [
     description: "Small plants have a stem and leaves. They grow from seeds.",
     parts: ["Stem", "Leaves"],
     partsEmoji: ["🌿", "🍃"],
-    type: "plant"
+    type: "plant",
+     outlineImage:"/public/assets/small_plant_ot.png"
   },
   {
     id: "plant-4",
@@ -312,7 +315,8 @@ export const plantsData = [
     description: "Carrots grow under the ground. They have leaves above and root below.",
     parts: ["Leaves", "Root"],
     partsEmoji: ["🍃", "🥕"],
-    type: "vegetable"
+    type: "vegetable",
+     outlineImage:"/public/assets/carrot_ot.png"
   },
   {
     id: "plant-5",
@@ -322,7 +326,51 @@ export const plantsData = [
     description: "Apple trees give us sweet apples. They have fruits and leaves.",
     parts: ["Fruit", "Leaves", "Trunk"],
     partsEmoji: ["🍎", "🍃", "🪵"],
-    type: "fruit"
+    type: "fruit",
+     outlineImage:"/public/assets/apple_ot.png"
+  }
+];
+// Memory game images 
+export const memoryGameImages = [
+  {
+    id: "mem-1",
+    name: "catus",
+    image: "/public/assets/catus.png"
+  },
+  {
+    id: "mem-2",
+    name: "Pine tree",
+    image: "/public/assets/pine.png"
+  },
+  {
+    id: "mem-3",
+    name: "apple tree",
+    image: "/public/assets/apple.png"
+  },
+  {
+    id: "mem-4",
+    name: "lotus",
+    image: "/public/assets/lotus.png"
+  },
+  {
+    id: "mem-5",
+    name: "strawberry",
+    image: "/public/assets/strawberry.png"
+  },
+  {
+    id: "mem-6",
+    name: "paddy",
+    image: "/public/assets/paddy.png"
+  },
+  {
+    id: "mem-7",
+    name: "Aloe vera",
+    image: "/public/assets/av.png"
+  },
+  {
+    id: "mem-8",
+    name: "Sunflower",
+    image: "/public/assets/sunflower.png"
   }
 ];
  
@@ -465,7 +513,7 @@ export const animalGames = [
 
 export const plantGames = [
   { id: "tap-part", name: "Tap the Part", emoji: "👆", description: "Tap the leaf, petal, or root", path: "/games/plants/tap-part" },
-  { id: "matching", name: "Match Parts", emoji: "🧩", description: "Match parts to plants", path: "/games/plants/matching" },
+  { id: "matching", name: " Memory Match Game", emoji: "🧩", description: "Match the cards", path: "/games/plants/matching" },
   { id: "grow-plant", name: "Grow a Plant", emoji: "🌱", description: "Water to help plant grow", path: "/games/plants/grow" },
   { id: "coloring", name: "Coloring", emoji: "🎨", description: "Color the plants", path: "/games/plants/coloring" }
 ];
@@ -473,8 +521,7 @@ export const plantGames = [
 export const weatherGames = [
   { id: "today-weather", name: "Today's Weather", emoji: "🌤️", description: "Choose what matches outside", path: "/games/weather/today" },
   { id: "matching", name: "Match Weather", emoji: "🧩", description: "Match weather to picture", path: "/games/weather/matching" },
-  { id: "dress-up", name: "Dress for Weather", emoji: "👗", description: "Pick right clothes", path: "/games/weather/dress" },
-  { id: "tap-animation", name: "Tap Animation", emoji: "✨", description: "Tap to see weather happen", path: "/games/weather/animation" }
+  { id: "dress-up", name: "Dress for Weather", emoji: "👗", description: "Pick right clothes", path: "/games/weather/dress" }
 ];
 
 export const seasonGames = [

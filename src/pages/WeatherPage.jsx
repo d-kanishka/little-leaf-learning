@@ -69,7 +69,7 @@ export default function WeatherPage() {
             className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-sky-200 to-blue-200 rounded-2xl font-bold text-lg shadow-md hover:scale-105 transition-transform"
           >
             <Gamepad2 className="w-6 h-6" />
-            {showGames ? 'Hide Activities' : '🎮 Play Activities'}
+            {showGames ? 'Hide Activities' : 'Play Activities'}
           </button>
 
           {showGames && (

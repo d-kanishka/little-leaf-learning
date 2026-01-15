@@ -23,7 +23,7 @@ import PlantColoringGame from "./pages/games/plants/ColoringGame";
 import WeatherTodayGame from "./pages/games/weather/TodayWeatherGame";
 import WeatherMatchingGame from "./pages/games/weather/MatchingGame";
 import DressWeatherGame from "./pages/games/weather/DressWeatherGame";
-import WeatherAnimationGame from "./pages/games/weather/AnimationGame";
+
 // Season Games
 import SeasonWheelGame from './pages/games/seasons/WheelGame';
 import SeasonMatchingGame from './pages/games/seasons/MatchingGame';
@@ -59,7 +59,6 @@ const App = () => (
             <Route path="/games/weather/today" element={<WeatherTodayGame />} />
             <Route path="/games/weather/matching" element={<WeatherMatchingGame />} />
             <Route path="/games/weather/dress" element={<DressWeatherGame />} />
-            <Route path="/games/weather/animation" element={<WeatherAnimationGame />} />
             {/* Season Games */}
             <Route path="/games/seasons/drawing" element={<SeasonDrawingGame />} />
             <Route path="/games/seasons/wheel" element={<SeasonWheelGame />} />
