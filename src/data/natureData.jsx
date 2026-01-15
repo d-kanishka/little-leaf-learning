@@ -10,7 +10,7 @@ export const animalsData = [
     shelterName: "Kennel",
     category: "domestic",
     soundText: "Woof woof! I am a dog!",
-    outlineImage:"/src/assets/dog_ot.png"
+    outlineImage:"/assets/dog_ot.png"
   },
   {
     id: "animal-2",
@@ -22,7 +22,7 @@ export const animalsData = [
     shelterName: "Home",
     category: "domestic",
     soundText: "Meow meow! I am a cat!",
-    outlineImage:"/src/assets/cat_ot.png"
+    outlineImage:"/assets/cat_ot.png"
   },
   {
     id: "animal-3",
@@ -34,7 +34,7 @@ export const animalsData = [
     shelterName: "Cowshed",
     category: "domestic",
     soundText: "Moo moo! I am a cow!",
-    outlineImage:"/src/assets/cow_ot.png"
+    outlineImage:"/assets/cow_ot.png"
   },
   {
     id: "animal-4",
@@ -46,7 +46,7 @@ export const animalsData = [
     shelterName: "Stable",
     category: "domestic",
     soundText: "Neigh neigh! I am a horse!",
-    outlineImage:"/src/assets/horse_ot.png"
+    outlineImage:"/assets/horse_ot.png"
   },
   {
     id: "animal-5",
@@ -58,7 +58,7 @@ export const animalsData = [
     shelterName: "Burrow",
     category: "domestic",
     soundText: "Squeak squeak! I am a rabbit!",
-    outlineImage:"/src/assets/ra_ot.png"
+    outlineImage:"/assets/ra_ot.png"
   },
 
   {
@@ -71,7 +71,7 @@ export const animalsData = [
     shelterName: "Trees",
     category: "bird",
     soundText: "Chirp chirp! I am a sparrow!",
-    outlineImage:"/src/assets/sp_ot.png"
+    outlineImage:"/assets/sp_ot.png"
   },
   {
     id: "animal-7",
@@ -83,7 +83,7 @@ export const animalsData = [
     shelterName: "Coop",
     category: "bird",
     soundText: "Cluck cluck! I am a hen!",
-    outlineImage:"/src/assets/hen_ot.png"
+    outlineImage:"/assets/hen_ot.png"
   },
   {
     id: "animal-8",
@@ -95,7 +95,7 @@ export const animalsData = [
     shelterName: "Ponds/Lakes",
     category: "bird",
     soundText: "Quack quack! I am a duck!",
-    outlineImage:"/src/assets/duck_ot.png"
+    outlineImage:"/assets/duck_ot.png"
   },
 
   {
@@ -109,7 +109,7 @@ export const animalsData = [
     shelterName: "Water",
     category: "water",
     soundText: "Bubble bubble! I am a fish!",
-    outlineImage:"/src/assets/fish_ot.png"
+    outlineImage:"/assets/fish_ot.png"
   },
   {
     id: "animal-10",
@@ -121,44 +121,44 @@ export const animalsData = [
     shelterName: "Forest",
     category: "water",
     soundText: "I am a turtle! I move slowly!",
-    outlineImage:"/src/assets/tu_ot.png"
+    outlineImage:"/assets/tu_ot.png"
   },
 
   {
     id: "animal-11",
     name: "Butterfly",
     emoji: "🦋",
-    image: "/src/assets/butterfly.png",
+    image: "/assets/butterfly.png",
     description: "Butterflies have beautiful colorful wings. They fly from flower to flower.",
     shelter: "garden",
     shelterName: "Garden",
     category: "insect",
     soundText: "Flutter flutter! I am a butterfly!",
-    outlineImage:"/src/assets/bf_ot.png"
+    outlineImage:"/assets/bf_ot.png"
   },
   {
     id: "animal-12",
     name: "Snail",
     emoji: "🐌",
-    image: "/src/assets/snail.png",
+    image: "/assets/snail.png",
     description: "Snails carry their shell on their back and move very slowly.",
     shelter: "shell",
     shelterName: "Shell",
     category: "insect",
     soundText: "I am a snail! I move slowly!",
-    outlineImage:"/src/assets/snail_ot.png"
+    outlineImage:"/assets/snail_ot.png"
   },
   {
     id: "animal-13",
     name: "Ladybug",
     emoji: "🐞",
-    image: "/src/assets/ladybug.png",
+    image: "/assets/ladybug.png",
     description: "Ladybugs are small red insects with black spots. They live on plants.",
     shelter: "leaves",
     shelterName: "Leaves",
     category: "insect",
     soundText: "I am a ladybug! I live on leaves!",
-    outlineImage:"/src/assets/lb_ot.png"
+    outlineImage:"/assets/lb_ot.png"
   }
 ];
 import React from 'react';
@@ -283,7 +283,7 @@ export const plantsData = [
     parts: ["Root", "Trunk", "Branches", "Leaves"],
     partsEmoji: ["🌱", "🪵", "🌿", "🍃"],
     type: "tree",
-    outlineImage:"/public/assets/tree_ot.png"
+    outlineImage:"/assets/tree_ot.png"
   },
   {
     id: "plant-2",
@@ -294,7 +294,7 @@ export const plantsData = [
     parts: ["Petals", "Stem", "Leaves"],
     partsEmoji: ["🌸", "🌿", "🍃"],
     type: "flower",
-     outlineImage:"/public/assets/flower_ot.png"
+     outlineImage:"/assets/flower_ot.png"
   },
   {
     id: "plant-3",
@@ -305,7 +305,7 @@ export const plantsData = [
     parts: ["Stem", "Leaves"],
     partsEmoji: ["🌿", "🍃"],
     type: "plant",
-     outlineImage:"/public/assets/small_plant_ot.png"
+     outlineImage:"/assets/small_plant_ot.png"
   },
   {
     id: "plant-4",
@@ -316,7 +316,7 @@ export const plantsData = [
     parts: ["Leaves", "Root"],
     partsEmoji: ["🍃", "🥕"],
     type: "vegetable",
-     outlineImage:"/public/assets/carrot_ot.png"
+     outlineImage:"/assets/carrot_ot.png"
   },
   {
     id: "plant-5",
@@ -327,7 +327,7 @@ export const plantsData = [
     parts: ["Fruit", "Leaves", "Trunk"],
     partsEmoji: ["🍎", "🍃", "🪵"],
     type: "fruit",
-     outlineImage:"/public/assets/apple_ot.png"
+     outlineImage:"/assets/apple_ot.png"
   }
 ];
 // Memory game images 
@@ -335,42 +335,42 @@ export const memoryGameImages = [
   {
     id: "mem-1",
     name: "catus",
-    image: "/public/assets/catus.png"
+    image: "/assets/catus.png"
   },
   {
     id: "mem-2",
     name: "Pine tree",
-    image: "/public/assets/pine.png"
+    image: "/assets/pine.png"
   },
   {
     id: "mem-3",
     name: "apple tree",
-    image: "/public/assets/apple.png"
+    image: "/assets/apple.png"
   },
   {
     id: "mem-4",
     name: "lotus",
-    image: "/public/assets/lotus.png"
+    image: "/assets/lotus.png"
   },
   {
     id: "mem-5",
     name: "strawberry",
-    image: "/public/assets/strawberry.png"
+    image: "/assets/strawberry.png"
   },
   {
     id: "mem-6",
     name: "paddy",
-    image: "/public/assets/paddy.png"
+    image: "/assets/paddy.png"
   },
   {
     id: "mem-7",
     name: "Aloe vera",
-    image: "/public/assets/av.png"
+    image: "/assets/av.png"
   },
   {
     id: "mem-8",
     name: "Sunflower",
-    image: "/public/assets/sunflower.png"
+    image: "/assets/sunflower.png"
   }
 ];
  
@@ -412,7 +412,7 @@ export const weatherData = [
     id: "weather-4",
     name: "Windy",
     emoji: "🌬️",
-    image: "/src/assets/windy.png",
+    image: "/assets/windy.png",
     gifPlaceholder: "/placeholder.svg",
     description: "Wind blows and leaves move. Trees sway in the breeze.",
     clothes: ["Jacket", "Scarf"],
@@ -461,7 +461,7 @@ export const seasonsData = [
     id: "season-3",
     name: "Autumn",
     emoji: "🍂",
-    image: "/src/assets/autum.png",
+    image: "/assets/autum.png",
     gifPlaceholder: "/assets/autum.gif",
     description: "Leaves change color and fall from trees. Weather becomes cool.",
     natureChange: "Leaves fall",
