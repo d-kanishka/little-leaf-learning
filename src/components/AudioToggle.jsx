@@ -9,7 +9,7 @@ export default function AudioToggle() {
     <button
       onClick={toggleAudio}
       className={`
-        fixed top-4 left-4 z-50 p-4 rounded-2xl shadow-lg transition-all duration-300
+        fixed top-4 right-4 z-50 p-3 rounded-full shadow-lg transition-all duration-300
         border-2 hover:scale-105 active:scale-95
         ${audioEnabled 
           ? 'bg-secondary/80 border-secondary text-secondary-foreground' 
@@ -19,9 +19,9 @@ export default function AudioToggle() {
       aria-label={audioEnabled ? 'Turn off sound' : 'Turn on sound'}
     >
       {audioEnabled ? (
-        <Volume2 className="w-6 h-6" />
+        <Volume2 className="w-5 h-5" />
       ) : (
-        <VolumeX className="w-6 h-6" />
+        <VolumeX className="w-5 h-5" />
       )}
     </button>
   );
