@@ -377,7 +377,7 @@ export default function AnimalColoringGame() {
               onClick={handleBack}
               className="flex-1 py-3 bg-gradient-to-r from-secondary to-primary rounded-xl font-bold shadow-md hover:scale-105 transition-transform"
             >
-              ✓ Done Coloring
+              Done Coloring
             </button>
           </div>
         </div>

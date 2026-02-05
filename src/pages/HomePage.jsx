@@ -43,7 +43,6 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-3 animate-slide-up flex items-center justify-center gap-3">
-            
             <span>Little Leaf Learning</span>
           </h1>
           <p className="text-xl text-muted-foreground animate-slide-up" style={{ animationDelay: '0.1s' }}>
@@ -80,10 +79,16 @@ export default function HomePage() {
               </button>
             ))}
           </div>
+
+          {/* Form Button */}
+          <button onClick={() => {playSound('click'); navigate('/games-preference');}}
+          className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-pink-200 via-orange-100 via-green-200 to-cyan-200 rounded-3xl font-bold text-lg shadow-lg hover:scale-105 transition-transform mt-6 animate-slide-up"
+          style={{ animationDelay: '0.5s' }}> Which Games Do You Like?
+          </button>
         </div>
       </main>
 
-      {/* footer */}
+      {/* Footer */}
       <footer className="fixed bottom-0 left-0 right-0 h-16 flex items-center justify-center gap-3 bg-gradient-to-t from-background to-transparent">
         {[...Array(5)].map((_, i) => (
           <Leaf
@@ -96,3 +101,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+

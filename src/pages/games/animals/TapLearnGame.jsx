@@ -6,7 +6,7 @@ import { animalsData } from '../../../data/natureData';
 import { useAudio } from '../../../contexts/AudioContext';
 
 export default function AnimalTapLearnGame() {
-  const [selectedAnimal, setSelectedAnimal] = useState(null);
+  const [selectedAnimal, setSelectedAnimal] = useState(null); // to track
   const { playAnimalSound, playSound } = useAudio(); 
 
   const filteredAnimals = animalsData.filter(animal => 

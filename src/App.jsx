@@ -29,6 +29,7 @@ import SeasonWheelGame from './pages/games/seasons/WheelGame';
 import SeasonMatchingGame from './pages/games/seasons/MatchingGame';
 import SeasonDrawingGame from './pages/games/seasons/DrawingGame';
 import NotFound from "./pages/NotFound";
+import FormPage from "./pages/FormPage";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
             <Route path="/weather" element={<WeatherPage />} />
             <Route path="/seasons" element={<SeasonsPage />} />
             <Route path="/games" element={<GamesPage />} />
+             <Route path="/games-preference" element={<FormPage />} />
             {/* Animal Games */}
             <Route path="/games/animals/tap-learn" element={<AnimalTapLearnGame />} />
             <Route path="/games/animals/drag-drop" element={<AnimalDragDropGame />} />
